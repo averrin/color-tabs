@@ -14,7 +14,7 @@ getCssElement = (path, color) ->
   while cssElement.firstChild?
     cssElement.removeChild cssElement.firstChild
   path = path.replace(/\\/g,"\\\\")
-  text_color = if (parseInt(color.replace('#', ''), 16) > 0xffffff/2) then 'black' else 'white'
+  text_color = if (parseInt(color.replace('#', ''), 16) > 0xffffff/2) then '#111' else '#eee'
   cssElement.appendChild document.createTextNode """
   ul.tab-bar>li.tab[data-path='#{path}'],
   ul.tab-bar>li.tab[data-path='#{path}']:before,
