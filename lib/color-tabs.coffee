@@ -14,6 +14,7 @@ getCssElement = (path, color) ->
   while cssElement.firstChild?
     cssElement.removeChild cssElement.firstChild
   path = path.replace(/\\/g,"\\\\")
+  text_color = if (parseInt(color.replace('#', ''), 16) > 0xffffff/2) then 'black' else 'white'
   cssElement.appendChild document.createTextNode """
   ul.tab-bar>li.tab[data-path='#{path}'],
   ul.tab-bar>li.tab[data-path='#{path}']:before,
@@ -21,26 +22,26 @@ getCssElement = (path, color) ->
   atom-workspace.theme-atom-light-ui ul.tab-bar>li.tab[data-path='#{path}'].active,
   atom-workspace.theme-atom-light-ui ul.tab-bar>li.tab[data-path='#{path}'].active:before,
   atom-workspace.theme-atom-light-ui ul.tab-bar>li.tab[data-path='#{path}'].active:after{
-    background-image:
-    -webkit-linear-gradient(top, #{color} 0%, rgba(0,0,0,0) 100%);
+    background-color: #{color};
   }
   atom-workspace.theme-atom-dark-ui ul.tab-bar>li.tab[data-path='#{path}'],
   atom-workspace.theme-atom-dark-ui ul.tab-bar>li.tab[data-path='#{path}']:before,
   atom-workspace.theme-atom-dark-ui ul.tab-bar>li.tab[data-path='#{path}']:after{
-    background-image:
-    -webkit-linear-gradient(top, #{color} 0%, #333333 100%);
+    background-color: #{color};
   }
   atom-workspace.theme-atom-dark-ui ul.tab-bar>li.tab[data-path='#{path}'].active,
   atom-workspace.theme-atom-dark-ui ul.tab-bar>li.tab[data-path='#{path}'].active:before,
   atom-workspace.theme-atom-dark-ui ul.tab-bar>li.tab[data-path='#{path}'].active:after{
-    background-image:
-    -webkit-linear-gradient(top, #{color} 0%, #222222 100%);
+    background-color: #{color};
   }
   atom-workspace.theme-atom-light-ui ul.tab-bar>li.tab[data-path='#{path}'],
   atom-workspace.theme-atom-light-ui ul.tab-bar>li.tab[data-path='#{path}']:before,
   atom-workspace.theme-atom-light-ui ul.tab-bar>li.tab[data-path='#{path}']:after{
-    background-image:
-    -webkit-linear-gradient(top, #{color} 0%, #d9d9d9 100%);
+    background-color: #{color};
+  }
+  ul.tab-bar>li.tab[data-path='#{path}'] div.foldername-tabs>span.file,
+  ul.tab-bar>li.tab[data-path='#{path}'] div.foldername-tabs>span.folder  {
+    color: #{text_color}
   }
   """
   return cssElement
